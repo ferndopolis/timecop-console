@@ -1,0 +1,7 @@
+= timecop-console
+
+Description goes here.
+
+== Copyright
+
+Copyright (c) 2009 John Trupiano. See LICENSE for details.
