@@ -26,9 +26,9 @@ You'll want to hook in the functionality in the specific environments that you w
     require 'timecop_console'
   end
 
-By requiring this file, you will open up ActionController::Base and inject an around_filter that will manage the current Time.now for you.  Additionally, it will add lib/timecop-console/controllers/timecop_controller to the load path along with it's routes.  The two routes are:
+By requiring this file, you will open up ActionController::Base and inject an around_filter that will manage Time.now and friends for you.  Additionally, it will add lib/timecop-console/controllers/timecop_controller.rb to the load path along with its routes.  The two routes are:
 
-  map.update_time '/timecop/update/:year/:month/:day/:hour/:minute/:second', :controller => 'timecop', :action => 'update'
+  map.update_time '/timecop/update', :controller => 'timecop', :action => 'update'
   map.reset_time '/timecop/reset', :controller => 'timecop', :action => 'reset'
 
 Then, to take advantage of this, you'll want to add a snippet of code to the bottom of your application's layout file, e.g.:
@@ -46,7 +46,7 @@ Then, to take advantage of this, you'll want to add a snippet of code to the bot
     </div>
   <% end -%>
 
-A default (and customizable) snippet like this will be added to this library shortly.  In the meantime, you can hand-write it.
+This snippet exposes textfields to allow you to alter each component of time (year, month, day, hour, minute, second).  It's raw, and there is no validation whatsoever.  A default (and customizable) snippet like this will be added to this library shortly.  In the meantime, you can hand-write it.
   
 == Copyright
 
