@@ -1,7 +1,71 @@
 = timecop-console
 
-Description goes here.
+* http://github.com/jtrupiano/timecop-console
 
+== Description
+
+timecop-console exposes controllers/routes for manipulating Time.now (using the Timecop gem) from your app.  This is especially useful
+during development and QA, as you can very easily simulate the movement of time.  Just as timecop gives you this ability within your tests,
+you can now easily make this available to your dev and QA team through a debug console.
+
+I have plans to build out rails-caddy, a debug console that will pull in timecop-console (and a few others that I'm thinking about) to
+truly give you a powerful QA tool.
+
+== Install
+  sudo gem install timecop-console            (latest stable release)
+  sudo gem install jtrupiano-timecop-console  (head of repository)
+  
+== Requirements
+  * Timecop ~> 0.2.1
+
+== How to Use
+
+You'll want to hook in the functionality in the specific environments that you want this to load in (probably only development, staging, and qa).  In the specific environment file (e.g. config/environments/staging.rb), include the following snippet:
+
+<pre>
+<code>
+
+  config.after_initialize do
+    require 'timecop_console'
+  end
+
+</code>
+</pre>
+
+By requiring this file, you will open up ActionController::Base and inject an around_filter that will manage the current Time.now for you.  Additionally, it will add lib/timecop-console/controllers/timecop_controller to the load path along with it's routes.  The two routes are:
+
+<pre>
+<code>
+
+  map.update_time '/timecop/update/:year/:month/:day/:hour/:minute/:second', :controller => 'timecop', :action => 'update'
+  map.reset_time '/timecop/reset', :controller => 'timecop', :action => 'reset'
+
+</code>
+</pre>
+
+Then, to take advantage of this, you'll want to add a snippet of code to the bottom of your application's layout file, e.g.:
+
+<pre>
+<code>
+
+  <% if ["development", "staging", "qa"].include?(RAILS_ENV) -%>
+    <div id="debug_console">
+    The time is <%= Time.now.to_s(:db) %> |
+    <% form_remote_tag :url => update_time_path do -%>
+      <%= submit_tag "Time Travel" %>
+      <% %w(year month day hour min sec).each do |field| -%>
+        <%= text_field_tag field, Time.now.send(field), :size => 4 %>
+      <% end -%>
+    <% end -%>
+    <%= link_to_remote "Reset", :url => reset_time_path %>
+    </div>
+  <% end -%>
+
+</code>
+</pre>
+
+A default (and customizable) snippet like this will be added to this library shortly.  In the meantime, you can hand-write it.
+  
 == Copyright
 
 Copyright (c) 2009 John Trupiano. See LICENSE for details.

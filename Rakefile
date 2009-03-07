@@ -5,10 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "timecop-console"
+    gem.rubyforge_project = "johntrupiano"
     gem.summary = %Q{Expose Timecop's capabilities to the UI in your rails app, allowing QA to take advantage of it.}
     gem.email = "jtrupiano@gmail.com"
     gem.homepage = "http://github.com/jtrupiano/timecop-console"
     gem.authors = ["John Trupiano"]
+    
+    gem.add_dependency "timecop", "~> 0.2.1"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
@@ -28,6 +31,10 @@ end
 begin
   require 'rake/contrib/sshpublisher'
   namespace :rubyforge do
+
+    desc "release gem and documentation to rubyforge"
+    task :release => ["rubyforge:release:gem", "rubyforge:release:docs"]
+
     namespace :release do
       desc "Publish RDoc to RubyForge."
       task :docs => [:rdoc] do
@@ -36,7 +43,7 @@ begin
         )
 
         host = "#{config['username']}@rubyforge.org"
-        remote_dir = "/var/www/gforge-projects/timecop-console/"
+        remote_dir = "/var/www/gforge-projects/johntrupiano/timecop-console/"
         local_dir = 'rdoc'
 
         Rake::SshDirPublisher.new(host, remote_dir, local_dir).upload
