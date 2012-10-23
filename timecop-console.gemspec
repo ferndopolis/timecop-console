@@ -3,6 +3,7 @@ require File.expand_path('../lib/timecop_console/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.add_dependency 'timecop', '~> 0.5'
+  gem.add_dependency 'rails', '~> 3.1'
   gem.authors = ["John Trupiano"]
   gem.description = %q{TimecopConsole manipulates Time.now using Timecop gem.}
   gem.email = ['jtrupiano@gmail.com']
