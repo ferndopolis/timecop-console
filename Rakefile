@@ -1,23 +1,6 @@
 require 'rubygems'
 require 'rake'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "timecop-console"
-    gem.rubyforge_project = "johntrupiano"
-    gem.summary = %Q{Expose Timecop's capabilities to the UI in your rails app, allowing QA to take advantage of it.}
-    gem.email = "jtrupiano@gmail.com"
-    gem.homepage = "http://github.com/jtrupiano/timecop-console"
-    gem.authors = ["John Trupiano"]
-    
-    gem.add_dependency "timecop", "~> 0.2.1"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
-end
-
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   config = YAML.load(File.read('VERSION.yml'))
