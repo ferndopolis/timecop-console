@@ -1,6 +1,0 @@
-
-gems:
-- name: Shoulda
-  version: '~> 1.2.0'
-- name: timecop
-  version: '~> 0.2.1'
