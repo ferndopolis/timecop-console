@@ -9,9 +9,9 @@ module TimecopControllerMethods
   # to be used as an around_filter
   def handle_timecop_offset
     # Establish now
-    if session[:timecop_adjusted_time].present?
-      Rails.logger.debug "[timecop-console] Time traveling to #{session[:timecop_adjusted_time].to_s}"
-      Timecop.travel(session[:timecop_adjusted_time])
+    if session[TimecopConsole::SESSION_KEY_NAME].present?
+      Rails.logger.debug "[timecop-console] Time traveling to #{session[TimecopConsole::SESSION_KEY_NAME].to_s}"
+      Timecop.travel(session[TimecopConsole::SESSION_KEY_NAME])
     else
       Timecop.return
     end
@@ -19,12 +19,12 @@ module TimecopControllerMethods
     # Run the intended action
     yield
 
-    if session[:timecop_adjusted_time].present?
+    if session[TimecopConsole::SESSION_KEY_NAME].present?
       # we want to continue to slide time forward, even if it's only 3 seconds at a time.
       # this ensures that subsequent calls during the same "time travel" actually pass time
       adjusted_time = Time.now + 3
       Rails.logger.debug "[timecop-console] Resetting session to: #{adjusted_time}"
-      session[:timecop_adjusted_time] = adjusted_time
+      session[TimecopConsole::SESSION_KEY_NAME] = adjusted_time
     end
   end
 
