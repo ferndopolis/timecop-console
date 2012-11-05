@@ -1,3 +1,6 @@
+*.gem
+.rvmrc
+.bundle
 *.sw?
 .DS_Store
 coverage
