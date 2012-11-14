@@ -15,7 +15,8 @@ truly give you a powerful QA tool.
 
 Add to your `Gemfile`:
 
-  gem 'timecop-console', :github => 'jtrupiano/timecop-console', :require => 'timecop_console'
+  gem 'timecop-console', '~> 0.2', :require => 'timecop_console'
+
 
 By requiring this dependency, it will open up ActionController::Base and inject an around_filter that will manage Time.now and friends for you.
 
