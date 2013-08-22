@@ -33,7 +33,7 @@ module TimecopConsole
 
       # http://api.rubyonrails.org/classes/ActionView/Helpers/DateHelper.html#method-i-date_select
       def date_select_format?
-        params['timecop']['current_time(1i)'].present?
+        params['timecop'].present? && params['timecop']['current_time(1i)'].present?
       end
   end
 end
