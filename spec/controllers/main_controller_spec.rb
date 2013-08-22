@@ -20,7 +20,19 @@ describe TimecopConsole::MainController do
       post :update, :timecop => timecop_param, :use_route => :timecop_console
 
       response.should redirect_to("where_i_came_from")
-    end 
+    end
+
+    context "with backward compatible format" do
+      let(:date_params) do
+        { year: 2013, month: 8, day: 22, hour: 12, min: 0, sec: 0 }
+      end
+
+      it 'redirects back' do
+        post :update, date_params.merge(use_route: :timecop_console)
+
+        response.should redirect_to("where_i_came_from")
+      end
+    end
   end
 
   describe "GET to :reset" do
