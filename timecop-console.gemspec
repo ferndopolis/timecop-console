@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.description = %q{TimecopConsole manipulates Time.now using Timecop gem.}
   spec.email = ['jtrupiano@gmail.com']
   spec.files = Dir['Gemfile', 'LICENSE', 'README.rdoc', 'Rakefile', 'app/**/*', 'config/**/*', 'lib/**/*']
-  spec.homepage = 'https://github.com/jtrupiano/timecop-console'
+  spec.homepage = 'https://github.com/ferndopolis/timecop-console'
   spec.name = 'timecop-console'
   spec.require_paths = ['lib']
   spec.required_rubygems_version = Gem::Requirement.new('>= 1.3.6')
