@@ -15,8 +15,11 @@ truly give you a powerful QA tool.
 
 Add to your `Gemfile`:
 
-  gem 'timecop-console', '~> 0.2', :require => 'timecop_console'
+  group :development, :staging do
+    gem 'timecop-console', '~> 0.2', :require => 'timecop_console'
+  end
 
+Protip: avoid having `timecop-console` gem as part of `test` group if you use Timecop in your tests to avoid any hard-to-debug exceptions.
 
 By requiring this dependency, it will open up ActionController::Base and inject an around_filter that will manage Time.now and friends for you.
 
