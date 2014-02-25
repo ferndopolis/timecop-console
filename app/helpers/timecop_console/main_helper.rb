@@ -1,6 +1,10 @@
 module TimecopConsole
   module MainHelper
     def time_travel_to(date)
+      unless date.respond_to?(:year) && date.respond_to?(:month) && date.respond_to?(:day)
+        raise ArgumentError, "Argument must be a Date object"
+      end
+
       link_to date.strftime("%B %d, %Y"), timecop_console.update_path(timecop:
             {
               'current_time(1i)' => date.year,
