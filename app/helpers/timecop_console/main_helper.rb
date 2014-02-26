@@ -17,5 +17,23 @@ module TimecopConsole
                 update_path,
                 method: :post)
     end
+
+    def timecop_console_layout
+      if Rails.env.development? || Rails.env.staging?
+        content_tag(:div, id: "debug-console") do
+          concat(yield) if block_given?
+          concat(content_tag(:p) {
+            raw("<-- #{time_travel_to(24.hours.ago)}") +
+            "The time is #{Time.now.to_s(:db)}" +
+            raw("#{time_travel_to(24.hours.from_now)} -->");
+          })
+          concat(form_tag(timecop_console.update_path) {
+            concat(content_tag(:p, datetime_select("timecop", "current_time")));
+            concat(content_tag(:p, submit_tag( "Time Travel", class: 'btn')));
+          })
+          concat(link_to("Reset", timecop_console.reset_path))
+        end
+      end
+    end
   end
 end
