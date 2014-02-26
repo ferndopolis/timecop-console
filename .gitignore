@@ -7,3 +7,5 @@ coverage
 rdoc
 pkg
 Gemfile.lock
+spec/dummy_app/log
+spec/dummy_app/tmp

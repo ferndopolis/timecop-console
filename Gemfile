@@ -1,9 +1,8 @@
-source :rubygems
+source 'https://rubygems.org'
 
-group :development, :test do
-  gem 'simplecov', '~> 0.6', :require => false
-
-  gem 'rspec-rails', '~> 2.12'
+group :test do
+  gem 'simplecov', :require => false
+  gem 'rspec-rails'
 end
 
 gemspec
