@@ -5,4 +5,8 @@ group :test do
   gem 'rspec-rails'
 end
 
+group :development, :test do
+  gem 'pry'
+end
+
 gemspec
