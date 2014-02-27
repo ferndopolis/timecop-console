@@ -20,7 +20,7 @@ module TimecopConsole
         second = params[:sec]
       end
 
-      session[SESSION_KEY_NAME] = Time.local(year, month, day, hour, minute, second)
+      session[SESSION_KEY_NAME] = Time.zone.local(year, month, day, hour, minute, second)
       redirect_to :back
     end
 

@@ -28,6 +28,6 @@ describe SampleController do
       session[TimecopConsole::SESSION_KEY_NAME] = frozen_time
 
       expect { get :index }.to raise_error(frozen_time.to_s)
-    end 
+    end
   end
 end

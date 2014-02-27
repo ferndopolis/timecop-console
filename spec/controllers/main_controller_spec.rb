@@ -19,6 +19,7 @@ describe TimecopConsole::MainController do
     it 'redirects back' do
       post :update, :timecop => timecop_param, :use_route => :timecop_console
 
+
       response.should redirect_to("where_i_came_from")
     end
 
@@ -31,6 +32,14 @@ describe TimecopConsole::MainController do
         post :update, date_params.merge(use_route: :timecop_console)
 
         response.should redirect_to("where_i_came_from")
+      end
+
+      it 'sets virtual time with respect to Time.zone setting' do
+        Time.zone = ActiveSupport::TimeZone.all.detect { |tz| tz.name == 'Central Time (US & Canada)' } or raise("can not find TZ")
+
+        post :update, date_params.merge(use_route: :timecop_console)
+
+        session[TimecopConsole::SESSION_KEY_NAME].strftime('%d %b %H:%M %Z').should eq("22 Aug 12:00 CDT")
       end
     end
   end
