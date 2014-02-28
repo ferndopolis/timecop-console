@@ -19,7 +19,6 @@ describe TimecopConsole::MainController do
     it 'redirects back' do
       post :update, :timecop => timecop_param, :use_route => :timecop_console
 
-
       response.should redirect_to("where_i_came_from")
     end
 

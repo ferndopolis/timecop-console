@@ -31,7 +31,7 @@ module TimecopConsole
     end
 
     def timecop_console_layout
-      render :console_layout
+      render :console_layout, layout: nil
     end
   end
 end
