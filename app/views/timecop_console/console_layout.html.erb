@@ -1,0 +1,21 @@
+<div id="debug-console">
+  <%#<%= yield if block_given? %>%>
+  <p>
+    <%= time_travel_to(24.hours.ago, 'yesterday') %>
+  </p>
+  <p>
+    Current time is <%= Time.now.to_s(:db) %>
+  </p>
+  <p>
+    <%= time_travel_to(24.hours.from_now, 'tomorrow') %>
+  </p>
+  <%= form_tag timecop_console.update_path do %>
+    <p>
+      <%= datetime_select("timecop", "current_time") %>
+    </p>
+    <p>
+      <%= submit_tag "Time Travel", :class => 'btn' %>
+    </p>
+  <% end %>
+  <%= link_to "Reset", timecop_console.reset_path %>
+</div>
