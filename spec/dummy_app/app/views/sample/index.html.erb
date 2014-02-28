@@ -1,0 +1,9 @@
+<h1>TimeCopConsole Demo</h1>
+<p>Hello world!</p>
+<p>
+The time is now
+<%= Time.now %>
+</p>
+
+<%= time_travel_to(Date.parse("December 31, 1999")) %>
+<%= link_to "Reset Time", timecop_console.reset_path %>
