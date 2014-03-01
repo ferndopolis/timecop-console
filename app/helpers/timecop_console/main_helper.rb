@@ -21,7 +21,7 @@ module TimecopConsole
     end
 
     def timecop_console_layout
-      render :console_layout, layout: nil
+      render partial: 'timecop_console/console_layout', layout: false
     end
   end
 end
