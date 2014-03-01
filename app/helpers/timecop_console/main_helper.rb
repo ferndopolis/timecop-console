@@ -5,19 +5,9 @@ module TimecopConsole
         raise ArgumentError, "Argument must be a Date object"
       end
 
-      hour = if date.respond_to?(:hour)
-        date.hour
-      else
-        12
-      end
-
-      min = if date.respond_to?(:min)
-        date.min
-      else
-        0
-      end
-
       name ||= date.strftime("%B %d, %Y")
+      hour = date.respond_to?(:hour) ? date.hour : 12
+      min = date.respond_to?(:min) ? date.min : 0
 
       update_path = timecop_console.update_path(timecop: {
         'current_time(1i)' => date.year,
