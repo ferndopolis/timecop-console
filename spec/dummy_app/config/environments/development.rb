@@ -21,4 +21,6 @@ DummyApp::Application.configure do
 
   config.eager_load = false
 
+  config.assets.debug = true
+
 end
