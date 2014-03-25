@@ -1,12 +1,6 @@
-<div id="debug-console">
+<div id="timecop-console">
   <p>
-    <%= time_travel_to(24.hours.ago, 'yesterday') %>
-  </p>
-  <p>
-    Current time is <%= Time.now.to_s(:db) %>
-  </p>
-  <p>
-    <%= time_travel_to(24.hours.from_now, 'tomorrow') %>
+    <%= Time.now.strftime("Current time is: %D  %r") %>
   </p>
   <%= form_tag timecop_console.update_path do %>
     <p>
