@@ -1,3 +1,5 @@
+require "sprockets/railtie"
+
 DummyApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -20,5 +22,7 @@ DummyApp::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   config.eager_load = false
+
+  config.assets.debug = true
 
 end
