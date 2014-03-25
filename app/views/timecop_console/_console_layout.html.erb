@@ -1,0 +1,14 @@
+<div id="timecop-console">
+  <p>
+    <%= Time.now.strftime("Current time is: %D  %r") %>
+  </p>
+  <%= form_tag timecop_console.update_path do %>
+    <p>
+      <%= datetime_select("timecop", "current_time") %>
+    </p>
+    <p>
+      <%= submit_tag "Time Travel", :class => 'btn' %>
+    </p>
+  <% end %>
+  <%= link_to "Reset", timecop_console.reset_path %>
+</div>

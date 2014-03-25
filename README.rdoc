@@ -1,28 +1,20 @@
 = timecop-console
 
-* http://github.com/jtrupiano/timecop-console
-
-== Description
-
 timecop-console exposes controllers/routes for manipulating Time.now (using the Timecop gem) from your app.  This is especially useful
 during development and QA, as you can very easily simulate the movement of time.  Just as timecop gives you this ability within your tests,
 you can now easily make this available to your dev and QA team through a debug console.
-
-I have plans to build out rails-caddy, a debug console that will pull in timecop-console (and a few others that I'm thinking about) to
-truly give you a powerful QA tool.
 
 == How to Use
 
 Add to your `Gemfile`:
 
   group :development, :staging do
-    gem 'timecop-console', '~> 0.2', :require => 'timecop_console'
+    gem 'timecop-console', :require => 'timecop_console'
   end
 
-Protip: avoid having `timecop-console` gem as part of `test` group if you use Timecop in your tests to avoid any hard-to-debug exceptions.
+Avoid having `timecop-console` gem as part of `test` group if you use Timecop in your tests to avoid any hard-to-debug exceptions.
 
 By requiring this dependency, it will open up ActionController::Base and inject an around_filter that will manage Time.now and friends for you.
-
 
 You'll want to hook in the mountable engine for handling time changes in the specific environments that you want this to load in (probably only development, staging). Modify your `config/routes.rb`, adding:
 
@@ -30,30 +22,23 @@ You'll want to hook in the mountable engine for handling time changes in the spe
     mount TimecopConsole::Engine => '/timecop_console'
   end
 
-
 Then, to take advantage of this, you'll want to add a snippet of code to the bottom of your application's layout file, e.g.:
 
   <% if Rails.env.development? || Rails.env.staging? %>
-
-    <div id="debug-console">
-      <p>
-        The time is <%= Time.now.to_s(:db) %> |
-      </p>
-      <%= form_tag timecop_console.update_path do %>
-        <p>
-          <%= datetime_select("timecop", "current_time") %>
-        </p>
-
-        <p>
-          <%= submit_tag "Time Travel", :class => 'btn' %>
-        </p>
-      <% end %>
-      <%= link_to "Reset", timecop_console.reset_path %>
-    </div>
-
+    <%= timecop_console_layout %>
   <% end %>
 
-This snippet exposes textfields to allow you to alter each component of time (year, month, day, hour, minute, second).  It's raw, and there is no validation whatsoever.  A default (and customizable) snippet like this will be added to this library shortly.  In the meantime, you can hand-write it.
+This snippet exposes fields to allow you to alter each component of time (year, month, day, hour, minute, second).  It's raw, and there is no validation whatsoever.  A default (and customizable) snippet like this will be added to this library shortly.  In the meantime, you can hand-write it.
+
+== Helpers
+
+Use <tt>time_travel_to</tt> to create a button which will jump directly to a specific date:
+
+  <%= time_travel_to App.launch_date %>
+
+Where <tt>App.launch_date</tt> is a Date or DateTime object. By default the button will format to that date, but can be overwritten by passing a string:
+
+  <%= time_travel_to App.launch_date, "LAUNCH DATE" %>
 
 == Copyright
 
