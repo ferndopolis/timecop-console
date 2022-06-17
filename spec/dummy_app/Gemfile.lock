@@ -1,5 +1,5 @@
 PATH
-  remote: ../../
+  remote: ../..
   specs:
     timecop-console (0.3.1)
       railties (>= 3.1, < 5.0)
@@ -36,9 +36,11 @@ GEM
     atomic (1.1.15)
     builder (3.1.4)
     coderay (1.1.0)
+    concurrent-ruby (1.1.10)
     erubis (2.7.0)
     hike (1.2.3)
-    i18n (0.6.9)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
