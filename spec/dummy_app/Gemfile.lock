@@ -1,5 +1,5 @@
 PATH
-  remote: ../../
+  remote: ../..
   specs:
     timecop-console (0.3.1)
       railties (>= 3.1, < 5.0)
@@ -89,7 +89,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.38)
+    tzinfo (0.3.61)
 
 PLATFORMS
   ruby
